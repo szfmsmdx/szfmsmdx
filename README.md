@@ -1,8 +1,8 @@
-I’m a student at UCAS.<br>
-I’m interested in AI Infra, MLSYS, and HPC.<br>
-A cpp freshman.
+**I’m a student at UCAS.**<br>
+I’m interested in **AI Infra**, **MLSYS**, and **HPC**.<br>
+*A cpp freshman.*
 
-### Watch a snake eat my contributions
+### contributions
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./profile/snake-dark.svg">
