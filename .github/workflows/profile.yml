@@ -39,21 +39,21 @@ jobs:
           options: username=${{ github.repository_owner }}&show_icons=true&hide_border=true&theme=github_dark
           path: profile/stats-dark.svg
 
-      - name: Check the graphics before publishing
-        run: |
-          for svg in profile/snake{,-dark}.svg; do
-            grep -q '@keyframes' "$svg"
-          done
-          for svg in profile/stats{,-dark}.svg; do
-            grep -q 'data-testid="rank-circle"' "$svg"
-          done
-
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: profile-graphics
           path: profile/
           if-no-files-found: error
           retention-days: 1
+
+      - name: Check the graphics before publishing
+        run: |
+          for svg in profile/snake{,-dark}.svg; do
+            grep -q '@keyframes' "$svg" || { echo "::error::$svg is missing animation"; exit 1; }
+          done
+          for svg in profile/stats{,-dark}.svg; do
+            grep -q 'data-testid="rank-circle"' "$svg" || { echo "::error::$svg is missing the rank"; exit 1; }
+          done
 
   publish:
     needs: generate
